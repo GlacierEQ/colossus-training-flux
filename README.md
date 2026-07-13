@@ -1,2 +1,2 @@
 # colossus-training-flux
-Training job flux under MW/thermal caps (Colossus angle)
+**Portfolio** — training job packing under MW + thermal headroom (Colossus/xAI angle).
