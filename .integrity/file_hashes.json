@@ -1,16 +1,13 @@
 {
-  "repo": "colossus-training-flux",
-  "algorithm": "sha256",
-  "file_count": 9,
+  "file_count": 8,
   "hashes": {
-    "README.md": "d602d7932d67cc9e800b71e06bfff863248156bf7103d920b1f2fc361d79eece",
-    "EASTER_EGGS.md": "0c4fc58a6163b54497fc8327ec77f4293330eea4ba636e30db202836bd450900",
     "AKOS.md": "eae48200ee1bf2ec3fe2f267668b1dd09bac66f3bd2e01420e5787413f247a07",
+    "EASTER_EGGS.md": "0c4fc58a6163b54497fc8327ec77f4293330eea4ba636e30db202836bd450900",
     "HELIX_STRAND.md": "3c6b40b7f8138a8f0497ffb1c797ba35a0795398a386acbe820f6bb73d779a2c",
-    "mastermind_sidecar.py": "f0c1dc338b8dfb102d5baa17387db128a54d92777a3947c3010d7d810301f9a6",
+    "README.md": "b2eeab6f4df6c0b1b0a98d3977f8db1735e505aae1bb938e64bdc286c9e361b7",
     "SECURITY_AND_FLEET_OPS.md": "26141c0f07d95847d679de423ddb7bdee6f3e319d204383c89a58d6d3bb610c7",
-    "tests/test_training_flux.py": "c23f235166bb7f03ae7926151360e6bb61c2d6a23e89365e89d45e955a559a9f",
-    ".github/workflows/ci.yml": "393542f8109cac2611d6ab41b8b062e6cc8be46894379568f15c0b7e2c1a639f",
-    "src/training_flux.py": "c150b328b50a4c85f747b1fe758fd90ee95f29f7b2413a3eecae3fd3982a1c58"
+    "mastermind_sidecar.py": "f0c1dc338b8dfb102d5baa17387db128a54d92777a3947c3010d7d810301f9a6",
+    "src/training_flux.py": "c150b328b50a4c85f747b1fe758fd90ee95f29f7b2413a3eecae3fd3982a1c58",
+    "tests/test_training_flux.py": "c23f235166bb7f03ae7926151360e6bb61c2d6a23e89365e89d45e955a559a9f"
   }
 }
