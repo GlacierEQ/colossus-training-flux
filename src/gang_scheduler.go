@@ -68,7 +68,8 @@ func (s *GangScheduler) RegisterNode(node *GPUNode) error {
 	if _, exists := s.nodes[node.NodeID]; exists {
 		return fmt.Errorf("duplicate node ID: %s", node.NodeID)
 	}
-	s.nodes[node.NodeID] = node
+	copyNode := *node
+	s.nodes[copyNode.NodeID] = &copyNode
 	return nil
 }
 
@@ -100,13 +101,15 @@ func (s *GangScheduler) SubmitJob(job *TrainingJob) error {
 		}
 	}
 
-	job.SubmittedAt = time.Now()
-	s.pendingQueue = append(s.pendingQueue, job)
+	copyJob := *job
+	copyJob.Allocated = append([]string(nil), job.Allocated...)
+	copyJob.SubmittedAt = time.Now()
+	s.pendingQueue = append(s.pendingQueue, &copyJob)
 	sort.SliceStable(s.pendingQueue, func(i, j int) bool {
 		if s.pendingQueue[i].Priority == s.pendingQueue[j].Priority {
 			return s.pendingQueue[i].JobID < s.pendingQueue[j].JobID
 		}
-		return s.pendingQueue[i].Priority < s.pendingQueue[j].Priority
+		return s.pendingQueue[i].Priority > s.pendingQueue[j].Priority
 	})
 	return nil
 }
@@ -161,7 +164,9 @@ func (s *GangScheduler) ScheduleNext() (*TrainingJob, error) {
 	s.activeJobs[job.JobID] = job
 	s.totalAllocated += job.RequestedGPUs
 
-	return job, nil
+	result := *job
+	result.Allocated = append([]string(nil), job.Allocated...)
+	return &result, nil
 }
 
 func (s *GangScheduler) utilizationLocked() float64 {
