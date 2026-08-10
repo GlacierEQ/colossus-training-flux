@@ -3,7 +3,6 @@ set -euo pipefail
 
 python -m compileall -q src tests
 python -m unittest discover -s tests -p 'test_*.py' -v
-gofmt -w /tmp/empty.go 2>/dev/null || true
 unformatted="$(gofmt -l src/gang_scheduler.go src/gang_scheduler_test.go)"
 test -z "$unformatted"
 go test src/gang_scheduler.go src/gang_scheduler_test.go
