@@ -26,6 +26,75 @@ func TestSameZoneAllocationAndDeterministicNodeOrder(t *testing.T) {
 	}
 }
 
+func TestHigherPrioritySchedulesFirstWithStableTieBreak(t *testing.T) {
+	s := NewGangScheduler()
+	for _, node := range []*GPUNode{
+		{NodeID: "a1", ClusterZone: "a", TotalGPUs: 8, IsHealthy: true},
+		{NodeID: "a2", ClusterZone: "a", TotalGPUs: 8, IsHealthy: true},
+		{NodeID: "a3", ClusterZone: "a", TotalGPUs: 8, IsHealthy: true},
+	} {
+		if err := s.RegisterNode(node); err != nil {
+			t.Fatal(err)
+		}
+	}
+	for _, job := range []*TrainingJob{
+		{JobID: "low", Priority: 10, RequestedGPUs: 8},
+		{JobID: "z-high", Priority: 90, RequestedGPUs: 8},
+		{JobID: "a-high", Priority: 90, RequestedGPUs: 8},
+	} {
+		if err := s.SubmitJob(job); err != nil {
+			t.Fatal(err)
+		}
+	}
+	first, err := s.ScheduleNext()
+	if err != nil {
+		t.Fatal(err)
+	}
+	second, err := s.ScheduleNext()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if first.JobID != "a-high" || second.JobID != "z-high" {
+		t.Fatalf("unexpected priority order: %s then %s", first.JobID, second.JobID)
+	}
+}
+
+func TestRegisteredNodeAndSubmittedJobAreCopied(t *testing.T) {
+	s := NewGangScheduler()
+	node := &GPUNode{NodeID: "a1", ClusterZone: "a", TotalGPUs: 8, IsHealthy: true}
+	if err := s.RegisterNode(node); err != nil {
+		t.Fatal(err)
+	}
+	node.ClusterZone = "mutated"
+	node.IsHealthy = false
+	node.TotalGPUs = 800
+
+	job := &TrainingJob{JobID: "job", Priority: 50, RequestedGPUs: 8}
+	if err := s.SubmitJob(job); err != nil {
+		t.Fatal(err)
+	}
+	job.JobID = "mutated"
+	job.Priority = 0
+	job.RequestedGPUs = 800
+
+	allocated, err := s.ScheduleNext()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if allocated.JobID != "job" || allocated.RequestedGPUs != 8 {
+		t.Fatalf("caller mutation leaked into scheduler: %#v", allocated)
+	}
+	if len(allocated.Allocated) != 1 || allocated.Allocated[0] != "a1" {
+		t.Fatalf("registered node mutation leaked into scheduler: %#v", allocated.Allocated)
+	}
+
+	allocated.Allocated[0] = "caller-mutated"
+	stats := s.Stats()
+	if stats["active_jobs"].(int) != 1 || stats["total_gpus_allocated"].(int) != 8 {
+		t.Fatalf("returned job mutation affected internal state: %#v", stats)
+	}
+}
+
 func TestInsufficientSameZoneCapacityPreservesPendingJob(t *testing.T) {
 	s := NewGangScheduler()
 	for _, node := range []*GPUNode{
