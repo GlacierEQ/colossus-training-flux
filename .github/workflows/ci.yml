@@ -17,3 +17,4 @@ jobs:
       language: python
       strict: true
       verify_script: scripts/ci/verify.sh
+      upload_artifacts: false
