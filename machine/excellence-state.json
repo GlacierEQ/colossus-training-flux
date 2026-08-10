@@ -1,0 +1,39 @@
+{
+  "schema": "glaciereq.repo-excellence.record.v1",
+  "identity": {
+    "repository": "GlacierEQ/colossus-training-flux",
+    "repository_id": "colossus-training-flux",
+    "canonical_head": "RESOLVED",
+    "default_branch": "main",
+    "lineage_action": "migrated"
+  },
+  "state": "PROMOTED",
+  "canonical_role": "SPECIALIST_COMPONENT",
+  "scores": {
+    "target_architecture": 8.0,
+    "current_proof": "A",
+    "company_fit": 0.0,
+    "canonical_confidence": 0.0
+  },
+  "gates": {
+    "problem_verified": true,
+    "unique_value_known": true,
+    "canonical_identity_known": true,
+    "central_mechanism_implemented": true,
+    "deterministic_tests_pass": true,
+    "adversarial_tests_pass": true,
+    "runtime_behavior_observed": true,
+    "security_authority_bounded": true,
+    "proof_receipt_bound_to_sha": true,
+    "reusable_capabilities_extracted": true,
+    "projections_truth_consistent": true,
+    "evolution_cursor_defined": true
+  },
+  "evolution": {
+    "next_gate": "next:canonical_position_only_if_estate_role_resolved"
+  },
+  "proof_receipt": {
+    "source_sha": "migrated_sha_placeholder",
+    "identity": "migrated_identity_placeholder"
+  }
+}

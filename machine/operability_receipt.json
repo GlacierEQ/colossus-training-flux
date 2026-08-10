@@ -1,0 +1,36 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/colossus-training-flux",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "8163178b1f8d93c3905c2e362407717878775032956b77db86b34b943b5cf2a7",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "training_flux",
+    "ok": true,
+    "repository": "GlacierEQ/colossus-training-flux",
+    "smoke": {
+      "args": [
+        "[TrainJob(name='sample_name', gpus=1, wa",
+        "1.0"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "fn",
+      "name": "schedule",
+      "result": {
+        "confidence": 0.5868,
+        "plan": [
+          {
+            "job": "sample_name",
+            "mw": 0.0,
+            "outlet_c": 28.0,
+            "status": "RUN"
+          }
+        ],
+        "util": 0.0
+      }
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}

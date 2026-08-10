@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/colossus-training-flux",
+  "source_sha": "8163178b1f8d93c3905c2e362407717878775032956b77db86b34b943b5cf2a7",
+  "proof_receipt_digest": "a26fe56ac05db43adfdced196814ed6f7a29e3d7fbcf6a351158cb4d7d09e4ea",
+  "not_after": 1788927149.234226,
+  "mac": "a2f9b4cebe33aa0fdb04e8eb8c7dbb8664a4363425d04121a86dd6fa758606de",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}
