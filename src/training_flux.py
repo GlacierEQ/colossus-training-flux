@@ -11,14 +11,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import math
 
-<<<<<<< HEAD
 EVIDENCE_STATE = "MODELED_TRAINING_CAPACITY_SCENARIO_NOT_CLUSTER_RUNTIME"
 THERMAL_HOLD_C = 83.0
-=======
-CONFIDENCE_FLOOR = 0.31415
-FLUX = 1.21
-THROTTLE_C = 83.0
->>>>>>> 13c9a77 (chore: Hyper Excellence Activation & structural matrix alignment)
 
 
 @dataclass(frozen=True)
@@ -83,7 +77,6 @@ def model_capacity_schedule(
                 }
             )
             continue
-<<<<<<< HEAD
 
         modeled_outlet_c = ambient_c + (prospective_watts / 1_000_000.0) * 8.0
         if modeled_outlet_c >= THERMAL_HOLD_C:
@@ -123,16 +116,6 @@ def schedule(jobs: list[TrainJob], max_mw: float, ambient_c: float = 28.0) -> di
 
     return model_capacity_schedule(jobs, max_mw=max_mw, ambient_c=ambient_c)
 
-=======
-        used_w += need
-        # crude thermal proxy: more MW → higher outlet
-        outlet = ambient_c + (used_w / 1e6) * 8.0
-        status = "RUN" if outlet < THROTTLE_C else "THERMAL_HOLD"
-        plan.append({"job": j.name, "status": status, "mw": round(need/1e6, 3), "outlet_c": round(outlet, 2)})
-    util = used_w / (max_mw * 1e6)
-    conf = max(CONFIDENCE_FLOOR, 1.0 - abs(util - 1/FLUX) * 0.5)
-    return {"plan": plan, "util": round(util, 4), "confidence": round(conf, 4) }
->>>>>>> 13c9a77 (chore: Hyper Excellence Activation & structural matrix alignment)
 
 if __name__ == "__main__":
     demo_jobs = [
