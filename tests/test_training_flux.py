@@ -4,18 +4,8 @@ import math
 import sys
 import unittest
 from pathlib import Path
-<<<<<<< HEAD
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-=======
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]/"src"))
-from training_flux import TrainJob, schedule
-
-def test_budget():
-    jobs = [TrainJob("a", 1000, 700, 1.0, 1), TrainJob("b", 1000, 700, 0.5, 1)]
-    r = schedule(jobs, max_mw=0.5)
-    assert any(p["status"]=="QUEUED" for p in r["plan"]) or r["util"] <= 1.0
->>>>>>> 13c9a77 (chore: Hyper Excellence Activation & structural matrix alignment)
 
 from training_flux import TrainJob, model_capacity_schedule, schedule
 
