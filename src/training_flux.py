@@ -6,6 +6,7 @@ training, measure GPU telemetry, coordinate NCCL/NVLink, save checkpoints, or
 perform elastic scaling. It models priority ordering, a power budget, and a
 simple thermal hold heuristic from explicit local assumptions.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

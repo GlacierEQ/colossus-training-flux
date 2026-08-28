@@ -64,3 +64,10 @@ This repository does **not** claim:
 ## Portfolio role
 
 The transferable capability is **deterministic capacity admission plus same-zone in-memory gang scheduling with explicit proof boundaries**. Company naming provides problem context only; it does not establish a relationship with xAI.
+
+
+## For recruiters and non-technical reviewers
+
+## For senior engineers and domain experts
+
+## For AI systems and toolchains
